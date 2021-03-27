@@ -18,7 +18,8 @@ public class HttpRequest {
     private InputStream inputStream;
     private String url;
     private String method;
-    private final Map<String, String> headers = new HashMap<>();
+    private Header header = new Header();
+    private Cookie cookie;
     private Map<String, String> parameters;
     private Map<String, String> requestBody;
 
@@ -41,29 +42,20 @@ public class HttpRequest {
         this.method = fistLine[0];
         this.url = fistLine[1];
 
-        parsingHeaders(br, line);
+        header.saveHeaders(br, line);
 
         log.info("method : " + method);
         log.info("url : " + url);
-        int parseQueryStart = url.indexOf("?");
-        if(parseQueryStart != -1) {
-            parameters = HttpRequestUtils.parseQueryString(url.substring(parseQueryStart + 1, url.length()));
-            url = url.substring(0, parseQueryStart);
+
+        int queryStringStartIndex = url.indexOf("?");
+
+        if(queryStringStartIndex != -1) {
+            parameters = HttpRequestUtils.parseQueryString(url.substring(queryStringStartIndex + 1, url.length()));
+            url = url.substring(0, queryStringStartIndex);
         }
 
         if(!method.equals("GET")) {
-            requestBody = HttpRequestUtils.parseQueryString(IOUtils.readData(br, Integer.parseInt(headers.get("Content-Length"))));
-        }
-
-    }
-
-    private void parsingHeaders(BufferedReader br, String line) throws IOException {
-        while (!"".equals(line)) {
-            line = br.readLine();
-            String[] headerTokens = line.split(": ");
-            if (headerTokens.length == 2) {
-                headers.put(headerTokens[0], headerTokens[1]);
-            }
+            requestBody = HttpRequestUtils.parseQueryString(IOUtils.readData(br, Integer.parseInt(header.getAttribute("Content-Length"))));
         }
     }
 
@@ -79,10 +71,6 @@ public class HttpRequest {
         return method;
     }
 
-    public Map<String, String> getHeaders() {
-        return headers;
-    }
-
     public Map<String, String> getParameters() {
         return parameters;
     }
@@ -96,7 +84,6 @@ public class HttpRequest {
         return "HttpRequest{" +
                 ", url='" + url + '\'' +
                 ", method='" + method + '\'' +
-                ", headers=" + headers +
                 ", parameters=" + parameters +
                 ", requestBody=" + requestBody +
                 '}';
