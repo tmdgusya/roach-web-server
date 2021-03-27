@@ -14,7 +14,7 @@ contents..
 |---:|:---:|---|
 |BugFix|:bug: `:bug:`| bug: |
 |Review Fix|:wrench: `:wrench:` | fix: |
-|Documentation|:books:`:books`| doc: |
+|Documentation|:books:`:books:`| doc: |
 |Documenting Source Code|:bulb:`:bulb`| doc: |
 |Performance|:racehors:`:racehors:`| perf: |
 |Adding a Test|:white_check_mark:`:white_check_mark:`| test: |
@@ -26,4 +26,5 @@ contents..
 |Deploying Stuff|:rocket:`:rocket:`| infra: |
 |Add Dependency|:package:`:package:`| setup: |
 |Featuring New Function|:smiley_cat:`:smiley_cat:`| feat: |
+|test |:checkered_flag:`:checkered_flag:`| test: |
 
