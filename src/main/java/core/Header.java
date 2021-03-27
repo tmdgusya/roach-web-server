@@ -20,6 +20,10 @@ public class Header {
         }
     }
 
+    public boolean isExistAttribute(String attribute) {
+        return headers.containsKey(attribute);
+    }
+
     public String getAttribute(String key) {
         if(headers.containsKey(key)) {
             return headers.get(key);

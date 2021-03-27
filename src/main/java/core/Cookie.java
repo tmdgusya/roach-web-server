@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Cookie {
 
-    private final String COOKIE = "cookie";
+    public static final String COOKIE = "cookie";
 
     private final Map<String, String> cookies = new HashMap<>();
 

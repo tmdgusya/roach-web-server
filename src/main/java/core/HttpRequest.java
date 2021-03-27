@@ -11,6 +11,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import static core.Cookie.COOKIE;
+
 public class HttpRequest {
 
     private static final Logger log = LoggerFactory.getLogger(HttpRequest.class);
@@ -57,6 +59,11 @@ public class HttpRequest {
         if(!method.equals("GET")) {
             requestBody = HttpRequestUtils.parseQueryString(IOUtils.readData(br, Integer.parseInt(header.getAttribute("Content-Length"))));
         }
+
+        if (header.isExistAttribute(COOKIE)) {
+            cookie.saveCookie(header.getAttribute(COOKIE));
+        }
+
     }
 
     public static Logger getLog() {
