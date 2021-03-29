@@ -9,6 +9,7 @@ import org.reflections.util.FilterBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Set;
@@ -21,7 +22,7 @@ public class MappingUrlHandler {
 
     private final String method;
     private final String url;
-    private String className;
+    private Class<?> targetClass;
     private Method controllerMethod;
 
     public MappingUrlHandler(String method, String url) {
@@ -30,21 +31,20 @@ public class MappingUrlHandler {
     }
 
 
-    public void invokeMethod(HttpRequest httpRequest, HttpResponse httpResponse) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
+    public Object invokeMethod(HttpRequest httpRequest, HttpResponse httpResponse) throws InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException, ClassNotFoundException {
         final Method method = this.findMethod();
-        final Class<?> targetClass = Class.forName(className);
         final Object controllerClass = targetClass.getConstructor().newInstance();
         final Class<?>[] parameterTypes = method.getParameterTypes();
-        method.invoke(controllerClass, httpRequest, httpResponse);
+        return method.invoke(controllerClass, httpRequest, httpResponse);
     }
 
     private Method findMethod() throws ClassNotFoundException {
         return findController(scanForControllers("controller"));
     }
 
-    private Method findController(Class<?>[] controllerclasses) {
+    private Method findController(Class<?>[] controllerclasses) throws ClassNotFoundException {
         for(Class c : controllerclasses) {
-            this.className = c.getName();
+            this.targetClass = Class.forName(c.getName());
             final Method[] declaredMethods = c.getDeclaredMethods();
             if(method.equals("GET")) {
                 return findGetController(declaredMethods);
@@ -79,8 +79,5 @@ public class MappingUrlHandler {
         }
         throw new IllegalArgumentException("500 을 리턴해야한다.");
     }
-
-
-
 
 }
