@@ -19,6 +19,11 @@ contents..
 public String hello() {
     return "hello.html";
         }
+        
+@PostMapping(url = "/hello")
+public String hello() {
+        return "hiPost.html";
+        }
 ```
 
 - 위와 같이 사용할 수 있으며 `/hello` 로 요청이 들어오면 `hello.html` 을 리턴해준다.
@@ -29,6 +34,11 @@ public String hello() {
 public String hello() {
     return "redirect:/hi";
         }
+
+@PostMapping(url = "/hello")
+public String hello() {
+        return "redirect:hiPost";
+}
 ```
 
 - hi 라는 url 로 302 Redirect 가 가능하다.
