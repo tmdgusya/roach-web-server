@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Set;
 
 import static util.ReflectionUtils.*;
@@ -30,7 +31,6 @@ public class MappingUrlHandler {
         this.url = url;
     }
 
-
     public Object invokeMethod(HttpRequest httpRequest, HttpResponse httpResponse) throws InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException, ClassNotFoundException {
         final Method method = this.findMethod();
         final Object controllerClass = targetClass.getConstructor().newInstance();
@@ -42,15 +42,23 @@ public class MappingUrlHandler {
         return findController(scanForControllers("controller"));
     }
 
-    private Method findController(Class<?>[] controllerclasses) throws ClassNotFoundException {
-        for(Class c : controllerclasses) {
+    private Method findController(ArrayList<Class<?>> controllerclasses) throws ClassNotFoundException {
+        for(Class<?> c : controllerclasses) {
+            log.info("Class Name : {}", c.getName());
             this.targetClass = Class.forName(c.getName());
             final Method[] declaredMethods = c.getDeclaredMethods();
+            log.info("Method : " + method);
             if(method.equals("GET")) {
-                return findGetController(declaredMethods);
+                final Method controllerMethod = findGetController(declaredMethods);
+                if(controllerMethod != null) {
+                    return controllerMethod;
+                }
             }
             if(method.equals("POST")) {
-                return findPostController(declaredMethods);
+                final Method controllerMethod = findPostController(declaredMethods);
+                if(controllerMethod != null) {
+                    return controllerMethod;
+                }
             }
         }
         throw new IllegalArgumentException("500 을 리턴해야한다.");
@@ -65,7 +73,7 @@ public class MappingUrlHandler {
                 }
             }
         }
-        throw new IllegalArgumentException("500 을 리턴해야한다.");
+        return null;
     }
 
     private Method findPostController(Method[] methods) {
@@ -77,7 +85,7 @@ public class MappingUrlHandler {
                 }
             }
         }
-        throw new IllegalArgumentException("500 을 리턴해야한다.");
+        return null;
     }
 
 }
