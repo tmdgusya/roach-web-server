@@ -28,9 +28,6 @@ public class WebServer {
             beanFactory = new BeanFactory();
             AutoWiredProcessor autoWiredProcessor = new AutoWiredProcessor(beanFactory);
             autoWiredProcessor.conductBeanInjection();
-            Bean3 bean3 = (Bean3) beanFactory.getBean(Bean3.class);
-            System.out.println(bean3);
-            bean3.run();
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
