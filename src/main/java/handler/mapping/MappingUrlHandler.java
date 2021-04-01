@@ -3,18 +3,12 @@ package handler.mapping;
 import core.HttpRequest;
 import core.HttpResponse;
 import handler.invokeMethodHandler.InvokeMethodHandler;
-import org.reflections.Reflections;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
-import org.reflections.util.FilterBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Set;
 
 import static util.ReflectionUtils.*;
 
@@ -40,7 +34,7 @@ public class MappingUrlHandler {
     }
 
     private Method findMethod() throws ClassNotFoundException {
-        return findController(scanForControllers("controller"));
+        return findController(scanForControllers());
     }
 
     private Method findController(ArrayList<Class<?>> controllerclasses) throws ClassNotFoundException {
