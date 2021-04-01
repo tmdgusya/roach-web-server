@@ -1,4 +1,4 @@
-package controller;
+package user.controller;
 
 import core.HttpRequest;
 import core.HttpResponse;

@@ -1,4 +1,4 @@
-package controller;
+package user.controller;
 
 import core.HttpRequest;
 import core.HttpResponse;
@@ -9,9 +9,6 @@ import handler.mapping.PostMapping;
 import model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import util.HttpRequestUtils;
-import util.IOUtils;
-import util.ResponseData;
 
 import java.io.DataOutputStream;
 import java.util.Map;
