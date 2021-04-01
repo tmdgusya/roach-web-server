@@ -2,6 +2,7 @@ package handler.mapping;
 
 import core.HttpRequest;
 import core.HttpResponse;
+import handler.mapping.exception.NotFoundControllerMethodException;
 import org.junit.jupiter.api.Test;
 import org.assertj.core.api.Assertions;
 
@@ -16,17 +17,23 @@ import static org.assertj.core.api.Assertions.*;
 class MappingUrlHandlerTest {
 
     @Test
-    public void findGetMethodTest() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+    void findGetMethodTest() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         MappingUrlHandler mappingUrlHandler = new MappingUrlHandler("GET", "/test");
         final Method method = mappingUrlHandler.findMethod();
         assertThat(method.getName()).isEqualTo("get");
     }
 
     @Test
-    public void findPostMethodTest() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+   void findPostMethodTest() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         MappingUrlHandler mappingUrlHandler = new MappingUrlHandler("POST", "/test");
         final Method method = mappingUrlHandler.findMethod();
         assertThat(method.getName()).isEqualTo("post");
+    }
+
+    @Test
+    void notFoundMethodException() {
+        MappingUrlHandler mappingUrlHandler = new MappingUrlHandler("POST", "NOT!!");
+        org.junit.jupiter.api.Assertions.assertThrows(NotFoundControllerMethodException.class, mappingUrlHandler::findMethod);
     }
 
 }
