@@ -25,7 +25,7 @@ public class BeanFactory {
     }
 
     private void initializeBean() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        //TODO razy initialize Bean
+        //TODO lazy initialize Bean
         eagerInitializeBean();
         log.info("Eager Initialize Beans : {}", beanClasses);
     }
