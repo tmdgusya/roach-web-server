@@ -1,8 +1,10 @@
 package container;
 
 import container.BeanFactory;
+import container.exception.NoBeanDefinition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import user.NotBean;
 import user.TestBean1;
 import user.TestBean2;
 import org.assertj.core.api.Assertions;
@@ -34,6 +36,12 @@ class BeanFactoryTest {
     @Test
     void isNormallyOperateGetBeanByClassMethod() {
         assertThat(beanFactory.getBean(TestBean1.class)).isNotNull();
+    }
+
+    @Test
+    void notCreatedBean() {
+        org.junit.jupiter.api.Assertions.assertThrows(NoBeanDefinition.class,
+                () -> {beanFactory.getBean(NotBean.class);});
     }
 
 }
