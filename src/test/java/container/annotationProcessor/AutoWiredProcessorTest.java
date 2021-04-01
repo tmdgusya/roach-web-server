@@ -1,7 +1,6 @@
 package container.annotationProcessor;
 
 import container.BeanFactory;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import user.TestBean2;
