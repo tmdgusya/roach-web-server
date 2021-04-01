@@ -2,6 +2,7 @@ package handler.mapping;
 
 import core.HttpRequest;
 import core.HttpResponse;
+import handler.invokeMethodHandler.InvokeMethodHandler;
 import org.reflections.Reflections;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
@@ -35,7 +36,7 @@ public class MappingUrlHandler {
         final Method method = this.findMethod();
         final Object controllerClass = targetClass.getConstructor().newInstance();
         final Class<?>[] parameterTypes = method.getParameterTypes();
-        return method.invoke(controllerClass, httpRequest, httpResponse);
+        return InvokeMethodHandler.invoke(method, targetClass, httpRequest, httpResponse);
     }
 
     private Method findMethod() throws ClassNotFoundException {
