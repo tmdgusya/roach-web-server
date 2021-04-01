@@ -46,8 +46,8 @@ public class BeanFactory {
     }
 
     public Object getBean(Class<?> type) {
-        for(Class<?> bean : beanClasses) {
-            if(type.getName().equals(bean.getName())){
+        for(Object bean : beanFactory.values()) {
+            if(type.getName().equals(bean.getClass().getName())){
                 return bean;
             }
         }
