@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -42,6 +43,15 @@ public class BeanFactory {
             throw new NoBeanDefinition();
         }
         return beanFactory.get(beanName);
+    }
+
+    public Object getBean(Class<?> type) {
+        for(Class<?> bean : beanClasses) {
+            if(type.getName().equals(bean.getName())){
+                return bean;
+            }
+        }
+        throw new NoBeanDefinition();
     }
 
 }
