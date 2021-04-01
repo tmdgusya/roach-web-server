@@ -3,6 +3,7 @@ package handler.mapping;
 import core.HttpRequest;
 import core.HttpResponse;
 import handler.invokeMethodHandler.InvokeMethodHandler;
+import handler.mapping.exception.NotFoundControllerMethodException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +57,7 @@ public class MappingUrlHandler {
                 }
             }
         }
-        throw new IllegalArgumentException("500 을 리턴해야한다.");
+        throw new NotFoundControllerMethodException();
     }
 
     private Method findGetController(Method[] methods) {
