@@ -5,12 +5,16 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import container.BeanFactory;
+import container.annotationProcessor.AutoWiredProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import user.bean.Bean1;
+import user.bean.Bean3;
 
 public class WebServer {
     private static final Logger log = LoggerFactory.getLogger(WebServer.class);
     private static final int DEFAULT_PORT = 8080;
+    private static BeanFactory beanFactory;
 
     public static void main(String args[]) throws Exception {
         int port = 0;
@@ -21,7 +25,12 @@ public class WebServer {
         }
 
         try {
-            BeanFactory beanFactory = new BeanFactory();
+            beanFactory = new BeanFactory();
+            AutoWiredProcessor autoWiredProcessor = new AutoWiredProcessor(beanFactory);
+            autoWiredProcessor.conductBeanInjection();
+            Bean3 bean3 = (Bean3) beanFactory.getBean(Bean3.class);
+            System.out.println(bean3);
+            bean3.run();
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
