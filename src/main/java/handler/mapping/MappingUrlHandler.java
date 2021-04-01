@@ -27,13 +27,13 @@ public class MappingUrlHandler {
     }
 
     public Object invokeMethod(HttpRequest httpRequest, HttpResponse httpResponse) throws InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException, ClassNotFoundException {
-        final Method method = this.findMethod();
+        this.controllerMethod  = this.findMethod();
         final Object controllerClass = targetClass.getConstructor().newInstance();
-        final Class<?>[] parameterTypes = method.getParameterTypes();
-        return InvokeMethodHandler.invoke(method, targetClass, httpRequest, httpResponse);
+        final Class<?>[] parameterTypes = controllerMethod.getParameterTypes();
+        return InvokeMethodHandler.invoke(controllerMethod, targetClass, httpRequest, httpResponse);
     }
 
-    private Method findMethod() throws ClassNotFoundException {
+    public Method findMethod() throws ClassNotFoundException {
         return findController(scanForControllers());
     }
 
@@ -83,4 +83,7 @@ public class MappingUrlHandler {
         return null;
     }
 
+    public Method getControllerMethod() {
+        return controllerMethod;
+    }
 }
