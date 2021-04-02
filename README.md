@@ -10,7 +10,7 @@ contents..
 
 ## Using
 
-[Roach Cat Wiki](https://github.com/tmdgusya/roach-web-server/wiki/RoachCat-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95)
+[Roach Cat Wiki](https://github.com/tmdgusya/roach-web-server/wiki)
 
 ## Commit Message Icon
 
