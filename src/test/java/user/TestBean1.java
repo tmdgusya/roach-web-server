@@ -12,4 +12,8 @@ public class TestBean1 {
         return "autoWired";
     }
 
+    public String testBeanString() {
+        return "TestBean1";
+    }
+
 }
