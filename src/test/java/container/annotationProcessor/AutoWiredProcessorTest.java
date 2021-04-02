@@ -1,10 +1,12 @@
 package container.annotationProcessor;
 
 import container.BeanFactory;
+import container.annotation.AutoWired;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import user.TestBean2;
 import org.assertj.core.api.Assertions;
+import user.TestBean3;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -15,12 +17,19 @@ class AutoWiredProcessorTest {
     BeanFactory beanFactory;
     AutoWiredProcessor autoWiredProcessor;
     TestBean2 testBean2;
+    TestBean3 testBean3;
 
     @BeforeEach
     public void init() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         beanFactory = new BeanFactory();
         autoWiredProcessor = new AutoWiredProcessor(beanFactory);
         autoWiredProcessor.conductBeanInjection();
+    }
+
+    @Test
+    public void injectBeanByBeanNameTest() {
+        testBean3 = (TestBean3) beanFactory.getBean("user.TestBean3");
+        assertThat(testBean3.test()).isEqualTo("autoWired");
     }
 
     @Test
