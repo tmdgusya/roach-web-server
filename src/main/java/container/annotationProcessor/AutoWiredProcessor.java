@@ -30,7 +30,13 @@ public class AutoWiredProcessor {
             for(Field field : declaredFields) {
                 AutoWired annotation = field.getAnnotation(AutoWired.class);
                 if(annotation != null) {
-                    Object bean = beanFactory.getBean(beanClass);
+                    Object bean;
+                    System.out.println(annotation.className());
+                    if(!annotation.className().equals("")) {
+                        bean = beanFactory.getBean(annotation.className());
+                    } else {
+                        bean = beanFactory.getBean(beanClass);
+                    }
                     field.setAccessible(true);
                     field.set(bean, beanFactory.getBean(field.getType()));
                 }
