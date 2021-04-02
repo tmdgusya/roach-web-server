@@ -15,4 +15,8 @@ public class TestBean2 {
         return testBean1.test();
     }
 
+    public String testBeanString() {
+        return "TestBean2";
+    }
+
 }
