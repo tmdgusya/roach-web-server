@@ -31,7 +31,6 @@ public class AutoWiredProcessor {
                 AutoWired annotation = field.getAnnotation(AutoWired.class);
                 if(annotation != null) {
                     Object bean;
-                    System.out.println(annotation.className());
                     if(!annotation.className().equals("")) {
                         bean = beanFactory.getBean(annotation.className());
                     } else {
