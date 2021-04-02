@@ -21,10 +21,12 @@ public class RoachCat extends Thread {
         this.connection = connectionSocket;
     }
 
+    @Override
     public void run() {
         log.debug("New Client Connect! Connected IP : {}, Port : {}", connection.getInetAddress(), connection.getPort());
 
         try (InputStream in = connection.getInputStream(); OutputStream out = connection.getOutputStream()) {
+            log.info("Current Thread : " + Thread.currentThread().getName());
             HttpRequest httpRequest = new HttpRequest(in);
             httpRequest.run();
             HttpResponse httpResponse = new HttpResponse(out);
