@@ -54,4 +54,8 @@ public class BeanFactory {
         throw new NoBeanDefinition();
     }
 
+    public void changeBean(Object bean) {
+        beanFactory.put(bean.getClass().getName(), bean);
+    }
+
 }

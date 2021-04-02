@@ -3,7 +3,6 @@ package webserver;
 import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -11,8 +10,6 @@ import container.BeanFactory;
 import container.annotationProcessor.AutoWiredProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import user.bean.Bean1;
-import user.bean.Bean3;
 
 public class WebServer {
     private static final Logger log = LoggerFactory.getLogger(WebServer.class);
@@ -32,6 +29,7 @@ public class WebServer {
             beanFactory = new BeanFactory();
             AutoWiredProcessor autoWiredProcessor = new AutoWiredProcessor(beanFactory);
             autoWiredProcessor.conductBeanInjection();
+            autoWiredProcessor.conductConstructorBeanInjection();
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }

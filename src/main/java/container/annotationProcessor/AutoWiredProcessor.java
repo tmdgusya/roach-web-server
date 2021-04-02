@@ -10,9 +10,12 @@ import org.reflections.util.FilterBuilder;
 import user.bean.Bean1;
 import util.ReflectionUtils;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Set;
 
 public class AutoWiredProcessor {
@@ -38,6 +41,28 @@ public class AutoWiredProcessor {
                     }
                     field.setAccessible(true);
                     field.set(bean, beanFactory.getBean(field.getType()));
+                }
+            }
+        }
+    }
+
+    //TODO Create ConstructorInjectionMethod
+
+    public void conductConstructorBeanInjection() throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        final ArrayList<Class<?>> clazz = ReflectionUtils.scanForBeansClasses();
+        Object[] injectionBeans;
+        for(Class<?> beanClass : clazz) {
+            Constructor<?>[] constructors = beanClass.getConstructors();
+            for(Constructor<?> constructor : constructors) {
+                Annotation annotation = constructor.getAnnotation(AutoWired.class);
+                if(annotation != null) {
+                    Object bean = beanFactory.getBean(beanClass);
+                    Class<?>[] parameterTypes = constructor.getParameterTypes();
+                    injectionBeans = new Object[parameterTypes.length];
+                    for(int i = 0; i < parameterTypes.length; i++) {
+                        injectionBeans[i] = beanFactory.getBean(parameterTypes[i]);
+                    }
+                    beanFactory.changeBean(constructor.newInstance(injectionBeans));
                 }
             }
         }
