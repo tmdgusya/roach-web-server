@@ -26,7 +26,12 @@ public class AutoWiredProcessor {
         this.beanFactory = beanFactory;
     }
 
-    public void conductBeanInjection() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public void conductAutoInjection() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        conductBeanInjection();
+        conductConstructorBeanInjection();
+    }
+
+    private void conductBeanInjection() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         final ArrayList<Class<?>> classes = ReflectionUtils.scanForBeansClasses();
         for(Class<?> beanClass : classes) {
             final Field[] declaredFields = beanClass.getDeclaredFields();
@@ -46,9 +51,7 @@ public class AutoWiredProcessor {
         }
     }
 
-    //TODO Create ConstructorInjectionMethod
-
-    public void conductConstructorBeanInjection() throws IllegalAccessException, InvocationTargetException, InstantiationException {
+    private void conductConstructorBeanInjection() throws IllegalAccessException, InvocationTargetException, InstantiationException {
         final ArrayList<Class<?>> clazz = ReflectionUtils.scanForBeansClasses();
         Object[] injectionBeans;
         for(Class<?> beanClass : clazz) {
