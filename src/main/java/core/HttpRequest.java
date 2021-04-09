@@ -6,9 +6,7 @@ import util.HttpRequestUtils;
 import util.IOUtils;
 
 import java.io.*;
-import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.Map;
 
 import static core.Cookie.COOKIE;
@@ -19,7 +17,7 @@ public class HttpRequest {
 
     private InputStream inputStream;
     private String url;
-    private String method;
+    private RequestMethod method;
     private Header header = new Header();
     private Cookie cookie;
     private Map<String, String> parameters;
@@ -41,13 +39,10 @@ public class HttpRequest {
 
         final String[] fistLine = line.split(" ");
 
-        this.method = fistLine[0];
+        this.method = RequestMethod.valueOf(fistLine[0]);
         this.url = fistLine[1];
 
         header.saveHeaders(br, line);
-
-        log.info("method : " + method);
-        log.info("url : " + url);
 
         int queryStringStartIndex = url.indexOf("?");
 
@@ -56,7 +51,7 @@ public class HttpRequest {
             url = url.substring(0, queryStringStartIndex);
         }
 
-        if(!method.equals("GET")) {
+        if(!method.equals(RequestMethod.GET)) {
             requestBody = HttpRequestUtils.parseQueryString(IOUtils.readData(br, Integer.parseInt(header.getAttribute("Content-Length"))));
         }
 
@@ -74,7 +69,7 @@ public class HttpRequest {
         return url;
     }
 
-    public String getMethod() {
+    public RequestMethod getMethod() {
         return method;
     }
 
