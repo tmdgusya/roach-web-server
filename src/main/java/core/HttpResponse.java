@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
 
+/**
+ * HttpResponse
+ */
 public class HttpResponse {
 
     private OutputStream out;

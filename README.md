@@ -8,13 +8,6 @@
 contents..
 ```
 
-## JavaDocs
-
-[Api Document](https://tmdgusya.github.io/roach-web-server/)
-
-## Using
-
-[Roach Cat Wiki](https://github.com/tmdgusya/roach-web-server/wiki)
 
 ## Commit Message Icon
 
@@ -36,3 +29,7 @@ contents..
 |Featuring New Function|:smiley_cat:`:smiley_cat:`| feat: |
 |test |:checkered_flag:`:checkered_flag:`| test: |
 
+
+## Using
+
+[Roach Cat Wiki](https://github.com/tmdgusya/roach-web-server/wiki)

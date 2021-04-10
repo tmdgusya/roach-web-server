@@ -3,6 +3,9 @@ package core;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Cookie 는 Http 통신에 이용되며, Http Request , Http Response 에서 이용 가능합니다.
+ */
 public class Cookie {
 
     public static final String COOKIE = "cookie";

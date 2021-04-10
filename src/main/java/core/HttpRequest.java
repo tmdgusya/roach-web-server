@@ -6,20 +6,23 @@ import util.HttpRequestUtils;
 import util.IOUtils;
 
 import java.io.*;
-import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.Map;
 
 import static core.Cookie.COOKIE;
 
+/**
+ * HttpRequest 은 요청이 들어올 시 HttpRequest 정보를 저장하는 클래스 입니다.
+ * url, RequestMethod Header Cookie 등등.. 여러가지 정보등을 보관합니다.
+ * 현재는 HttpRequest 에서 InputStream 등의 작업을 수행하지만 Refactoring 후 다른곳에서 주입시켜줄 예정입니다.
+ */
 public class HttpRequest {
 
     private static final Logger log = LoggerFactory.getLogger(HttpRequest.class);
 
     private InputStream inputStream;
     private String url;
-    private String method;
+    private RequestMethod method;
     private Header header = new Header();
     private Cookie cookie;
     private Map<String, String> parameters;
@@ -41,13 +44,10 @@ public class HttpRequest {
 
         final String[] fistLine = line.split(" ");
 
-        this.method = fistLine[0];
+        this.method = RequestMethod.valueOf(fistLine[0]);
         this.url = fistLine[1];
 
         header.saveHeaders(br, line);
-
-        log.info("method : " + method);
-        log.info("url : " + url);
 
         int queryStringStartIndex = url.indexOf("?");
 
@@ -56,7 +56,7 @@ public class HttpRequest {
             url = url.substring(0, queryStringStartIndex);
         }
 
-        if(!method.equals("GET")) {
+        if(!method.equals(RequestMethod.GET)) {
             requestBody = HttpRequestUtils.parseQueryString(IOUtils.readData(br, Integer.parseInt(header.getAttribute("Content-Length"))));
         }
 
@@ -74,7 +74,7 @@ public class HttpRequest {
         return url;
     }
 
-    public String getMethod() {
+    public RequestMethod getMethod() {
         return method;
     }
 

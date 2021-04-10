@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+/**
+ * HttpHeader 도 마찬가지로 HttpRequest 와 HttpResponse 에서 이용 가능합니다.
+ */
 public class Header {
 
     private final Map<String, String> headers = new HashMap<>();

@@ -2,11 +2,14 @@ package handler.mapping;
 
 import core.HttpRequest;
 import core.HttpResponse;
+import core.RequestMethod;
 import handler.invokeMethodHandler.InvokeMethodHandler;
 import handler.mapping.exception.NotFoundControllerMethodException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.annotation.Annotation;
+import java.lang.annotation.Documented;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -17,12 +20,12 @@ public class MappingUrlHandler {
 
     private static final Logger log = LoggerFactory.getLogger(MappingUrlHandler.class);
 
-    private final String method;
+    private final RequestMethod method;
     private final String url;
     private Class<?> targetClass;
     private Method controllerMethod;
 
-    public MappingUrlHandler(String method, String url) {
+    public MappingUrlHandler(RequestMethod method, String url) {
         this.method = method;
         this.url = url;
     }
@@ -30,7 +33,6 @@ public class MappingUrlHandler {
     public Object invokeMethod(HttpRequest httpRequest, HttpResponse httpResponse) throws InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException, ClassNotFoundException {
         this.controllerMethod  = this.findMethod();
         final Object controllerClass = targetClass.getConstructor().newInstance();
-        final Class<?>[] parameterTypes = controllerMethod.getParameterTypes();
         return InvokeMethodHandler.invoke(controllerMethod, targetClass, httpRequest, httpResponse);
     }
 
@@ -40,17 +42,15 @@ public class MappingUrlHandler {
 
     private Method findController(ArrayList<Class<?>> controllerclasses) throws ClassNotFoundException {
         for(Class<?> c : controllerclasses) {
-            log.info("Class Name : {}", c.getName());
             this.targetClass = Class.forName(c.getName());
             final Method[] declaredMethods = c.getDeclaredMethods();
-            log.info("Method : " + method);
-            if(method.equals("GET")) {
+            if(method.equals(RequestMethod.GET)) {
                 final Method controllerMethod = findGetController(declaredMethods);
                 if(controllerMethod != null) {
                     return controllerMethod;
                 }
             }
-            if(method.equals("POST")) {
+            if(method.equals(RequestMethod.POST)) {
                 final Method controllerMethod = findPostController(declaredMethods);
                 if(controllerMethod != null) {
                     return controllerMethod;

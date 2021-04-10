@@ -11,6 +11,9 @@ import handler.returnValueHandle.ReturnValueHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 서버 어플리케이션 Thread 입니다. 요청 발생시 InputStream 과 DataOutputStream 을 분석하여 HttpRequest, HttpResponse 객체를 생성합니다.
+ */
 public class RoachCat extends Thread {
 
     private static final Logger log = LoggerFactory.getLogger(RoachCat.class);

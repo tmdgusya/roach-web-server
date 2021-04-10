@@ -25,8 +25,7 @@ class AutoWiredProcessorTest {
     public void init() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         beanFactory = new BeanFactory();
         autoWiredProcessor = new AutoWiredProcessor(beanFactory);
-        autoWiredProcessor.conductBeanInjection();
-        autoWiredProcessor.conductConstructorBeanInjection();
+        autoWiredProcessor.conductAutoInjection();
     }
 
     @Test
