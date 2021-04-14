@@ -13,6 +13,13 @@ public class Header {
 
     private final Map<String, String> headers = new HashMap<>();
 
+    public void addHeader(String key, String value) {
+        if(headers.containsKey(key)) {
+            throw new IllegalArgumentException("이미 존재하는 헤더값입니다.");
+        }
+        headers.put(key, value);
+    }
+
     public void saveHeaders(BufferedReader br, String line) throws IOException {
         while (!"".equals(line)) {
             line = br.readLine();
