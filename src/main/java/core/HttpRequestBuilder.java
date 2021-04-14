@@ -6,7 +6,7 @@ public class HttpRequestBuilder {
 
     private String url;
     private RequestMethod method;
-    private final Header header = new Header();
+    private Header header = new Header();
     private Cookie cookie;
     private Map<String, String> parameters;
     private Map<String, String> requestBody;
@@ -21,12 +21,22 @@ public class HttpRequestBuilder {
         return this;
     }
 
+    public HttpRequestBuilder setHeader(Header header) {
+        this.header = header;
+        return this;
+    }
+
     public HttpRequestBuilder addHeader(String key, String value) {
         header.addHeader(key, value);
         return this;
     }
 
-    public HttpRequestBuilder setCookie(String key, String value) {
+    public HttpRequestBuilder setCookie(Cookie cookie) {
+        this.cookie = cookie;
+        return this;
+    }
+
+    public HttpRequestBuilder addCookie(String key, String value) {
         cookie.addCookie(key, value);
         return this;
     }

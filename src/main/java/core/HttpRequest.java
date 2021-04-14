@@ -9,8 +9,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-import static core.Cookie.COOKIE;
-
 /**
  * HttpRequest 은 요청이 들어올 시 HttpRequest 정보를 저장하는 클래스 입니다.
  * url, RequestMethod Header Cookie 등등.. 여러가지 정보등을 보관합니다.
