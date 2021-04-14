@@ -1,17 +1,11 @@
 package handler.mapping;
 
-import core.HttpRequest;
-import core.HttpResponse;
 import core.RequestMethod;
 import handler.mapping.exception.NotFoundControllerMethodException;
 import org.junit.jupiter.api.Test;
-import org.assertj.core.api.Assertions;
 
-import java.io.DataOutputStream;
-import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.zip.InflaterInputStream;
 
 import static org.assertj.core.api.Assertions.*;
 

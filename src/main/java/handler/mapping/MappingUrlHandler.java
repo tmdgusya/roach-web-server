@@ -1,6 +1,6 @@
 package handler.mapping;
 
-import core.HttpRequest;
+import core.request.HttpRequest;
 import core.HttpResponse;
 import core.RequestMethod;
 import handler.invokeMethodHandler.InvokeMethodHandler;
@@ -8,8 +8,6 @@ import handler.mapping.exception.NotFoundControllerMethodException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.annotation.Annotation;
-import java.lang.annotation.Documented;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;

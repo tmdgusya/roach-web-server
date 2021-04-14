@@ -1,4 +1,8 @@
-package core;
+package core.request;
+
+import core.Cookie;
+import core.Header;
+import core.RequestMethod;
 
 import java.util.Map;
 

@@ -1,5 +1,8 @@
-package core;
+package core.request;
 
+import core.Cookie;
+import core.Header;
+import core.RequestMethod;
 import util.HttpRequestUtils;
 import util.IOUtils;
 

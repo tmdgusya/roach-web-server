@@ -4,8 +4,8 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 
-import core.HttpRequest;
-import core.HttpRequestParser;
+import core.request.HttpRequest;
+import core.request.HttpRequestParser;
 import core.HttpResponse;
 import handler.mapping.MappingUrlHandler;
 import handler.returnValueHandle.ReturnValueHandler;

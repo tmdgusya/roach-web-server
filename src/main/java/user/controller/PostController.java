@@ -1,6 +1,6 @@
 package user.controller;
 
-import core.HttpRequest;
+import core.request.HttpRequest;
 import core.HttpResponse;
 import handler.mapping.Controller;
 import handler.mapping.GetMapping;
