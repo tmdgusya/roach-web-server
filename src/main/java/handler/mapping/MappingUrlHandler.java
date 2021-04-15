@@ -1,7 +1,7 @@
 package handler.mapping;
 
 import core.request.HttpRequest;
-import core.HttpResponse;
+import core.response.HttpResponse;
 import core.RequestMethod;
 import handler.invokeMethodHandler.InvokeMethodHandler;
 import handler.mapping.exception.NotFoundControllerMethodException;

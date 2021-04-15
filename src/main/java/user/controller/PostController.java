@@ -1,7 +1,7 @@
 package user.controller;
 
 import core.request.HttpRequest;
-import core.HttpResponse;
+import core.response.HttpResponse;
 import handler.mapping.Controller;
 import handler.mapping.GetMapping;
 

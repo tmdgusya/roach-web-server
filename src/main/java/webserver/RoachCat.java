@@ -4,9 +4,11 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 
+import core.Cookie;
+import core.Header;
 import core.request.HttpRequest;
 import core.request.HttpRequestParser;
-import core.HttpResponse;
+import core.response.HttpResponse;
 import handler.mapping.MappingUrlHandler;
 import handler.returnValueHandle.ReturnValueHandler;
 import org.slf4j.Logger;
@@ -34,7 +36,7 @@ public class RoachCat extends Thread {
 
             HttpRequestParser httpRequestParser = new HttpRequestParser(in);
             HttpRequest httpRequest = httpRequestParser.parser();
-            HttpResponse httpResponse = new HttpResponse(out);
+            HttpResponse httpResponse = new HttpResponse(new Header(), new Cookie());
 
             MappingUrlHandler mappingUrlHandler = new MappingUrlHandler(httpRequest.getMethod(), httpRequest.getUrl());
             DataOutputStream dos = new DataOutputStream(out);
