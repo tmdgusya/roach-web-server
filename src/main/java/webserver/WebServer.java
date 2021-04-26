@@ -7,7 +7,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import container.BeanFactory;
+import container.annotationProcessor.AnnotationManager;
 import container.annotationProcessor.AutoWiredProcessor;
+import container.annotationProcessor.DefaultAnnotationManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +36,7 @@ public class WebServer {
             beanFactory = new BeanFactory();
             AutoWiredProcessor autoWiredProcessor = new AutoWiredProcessor(beanFactory);
             autoWiredProcessor.conductAutoInjection();
+            AnnotationManager annotationManager = new DefaultAnnotationManager();
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }

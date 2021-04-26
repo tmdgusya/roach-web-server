@@ -1,5 +1,8 @@
 package handler.mapping;
 
+import container.annotation.AliasFor;
+import container.annotation.MappingRequest;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -17,6 +20,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
+@AliasFor(alias = MappingRequest.class)
 public @interface PostMapping {
 
     String url() default "";

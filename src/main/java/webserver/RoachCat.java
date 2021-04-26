@@ -4,6 +4,8 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 
+import container.annotationProcessor.AnnotationManager;
+import container.annotationProcessor.DefaultAnnotationManager;
 import core.Cookie;
 import core.Header;
 import core.request.HttpRequest;
@@ -34,6 +36,8 @@ public class RoachCat extends Thread {
         try (InputStream in = connection.getInputStream(); OutputStream out = connection.getOutputStream()) {
             log.info("Current Thread : " + Thread.currentThread().getName());
 
+            //Crate HttpRequest && Parsing client Request && Create Response
+            //TODO Craete One Class HttpFactory(?)
             HttpRequestParser httpRequestParser = new HttpRequestParser(in);
             HttpRequest httpRequest = httpRequestParser.parser();
             HttpResponse httpResponse = new HttpResponse(new Header(), new Cookie());

@@ -1,9 +1,6 @@
 package container.annotation;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Service 는 Service 계층 로직임을 알려주기 위해 있는 어노테이션으로
@@ -12,9 +9,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
+@AliasFor(alias = Component.class)
 public @interface Service {
-
-    @AliasFor(alias = Component.class)
-    String value() default "";
 
 }

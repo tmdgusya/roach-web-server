@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  * 클래스를 @Component 로 간주하게 됩니다. 확장성을 넓혀주기 위해 사용되는 어노테이션입니다.
  *
  */
-@Target(ElementType.METHOD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface AliasFor {

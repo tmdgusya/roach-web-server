@@ -37,7 +37,7 @@ public class UserController {
 
         DataBase.addUser(user);
 
-        DataOutputStream dos = new DataOutputStream(httpResponse.getOut());
+//        DataOutputStream dos = new DataOutputStream(httpResponse.getOut());
         return "redirect:/";
     }
 
