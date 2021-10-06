@@ -42,8 +42,7 @@ public class UserController {
     }
 
     @GetMapping(url = "/users")
-    public String getUsers(HttpRequest httpRequest, HttpResponse httpResponse) {
-        return "list.html";
+    public String getUsers(HttpRequest httpRequest, HttpResponse httpResponse) {return "user/list.html";
     }
 
     @GetMapping(url = "/users/form")
